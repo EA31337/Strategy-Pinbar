@@ -6,8 +6,8 @@
 
 /**
  * @file
- * Implements Pattern strategy.
+ * Implements Pinbar strategy.
  */
 
 // Includes the main code.
-#include "Stg_Pattern.mq5"
+#include "Stg_Pinbar.mq5"

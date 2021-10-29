@@ -1,6 +1,6 @@
-# Strategy Pattern
+# Strategy Pinbar
 
-This is example pattern strategy for the patternnstration purposes.
+Strategy based on pinbar pattern scanning with CCI/RSI filter.
 
 [![Status][gha-image-check-master]][gha-link-check-master]
 [![Status][gha-image-compile-master]][gha-link-compile-master]
@@ -8,31 +8,23 @@ This is example pattern strategy for the patternnstration purposes.
 [![Discuss][gh-discuss-badge]][gh-discuss-link]
 [![License][license-image]][license-link]
 
-Strategy based on the Pattern indicator.
+Strategy based on the Pinbar indicator.
 
 ## Dependencies
 
 | Tag      | Framework |
 |:--------:|:---------:|
-| v1.000   | v2.000    |
-| v1.001   | v2.001    |
-| v1.002   | v2.002    |
-| v1.003   | v2.003    |
-| v1.004   | v2.004    |
-| v1.005   | v2.005    |
-| v1.006   | v2.006    |
-| v1.007   | v2.007    |
-| v1.008   | v2.008    |
+| v1.009   | v2.009    |
 
 <!-- Named links -->
 
 [gh-discuss-badge]: https://img.shields.io/badge/Discussions-Q&A-blue.svg?logo=github
 [gh-discuss-link]: https://github.com/EA31337/EA31337-Strategies/discussions
 
-[gha-link-check-master]: https://github.com/EA31337/Strategy-Pattern/actions?query=workflow:Check+branch%3Amaster
-[gha-image-check-master]: https://github.com/EA31337/Strategy-Pattern/workflows/Check/badge.svg?branch=master
-[gha-link-compile-master]: https://github.com/EA31337/Strategy-Pattern/actions?query=workflow:Compile+branch%3Amaster
-[gha-image-compile-master]: https://github.com/EA31337/Strategy-Pattern/workflows/Compile/badge.svg?branch=master
+[gha-link-check-master]: https://github.com/EA31337/Strategy-Pinbar/actions?query=workflow:Check+branch%3Amaster
+[gha-image-check-master]: https://github.com/EA31337/Strategy-Pinbar/workflows/Check/badge.svg?branch=master
+[gha-link-compile-master]: https://github.com/EA31337/Strategy-Pinbar/actions?query=workflow:Compile+branch%3Amaster
+[gha-image-compile-master]: https://github.com/EA31337/Strategy-Pinbar/workflows/Compile/badge.svg?branch=master
 
 [tg-channel-image]: https://img.shields.io/badge/Telegram-join-0088CC.svg?logo=telegram
 [tg-channel-link]: https://t.me/EA31337
