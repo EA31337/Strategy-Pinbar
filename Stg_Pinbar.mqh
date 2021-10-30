@@ -6,12 +6,12 @@
 // User input params.
 INPUT_GROUP("Pinbar strategy: strategy params");
 INPUT float Pinbar_LotSize = 0;                // Lot size
-INPUT int Pinbar_SignalOpenMethod = 0;         // Signal open method (0-16)
+INPUT int Pinbar_SignalOpenMethod = 2;         // Signal open method (0-16)
 INPUT float Pinbar_SignalOpenLevel = 1.6f;     // Signal open level
 INPUT int Pinbar_SignalOpenFilterMethod = 40;  // Signal open filter method
 INPUT int Pinbar_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
 INPUT int Pinbar_SignalOpenBoostMethod = 0;    // Signal open boost method
-INPUT int Pinbar_SignalCloseMethod = 0;        // Signal close method (0-16)
+INPUT int Pinbar_SignalCloseMethod = 2;        // Signal close method (0-16)
 INPUT int Pinbar_SignalCloseFilter = 0;        // Signal close filter (-127-127)
 INPUT float Pinbar_SignalCloseLevel = 2.4f;    // Signal close level
 INPUT int Pinbar_PriceStopMethod = 0;          // Price limit method
@@ -111,7 +111,7 @@ class Stg_Pinbar : public Strategy {
         // Buy signal.
         _result &= _pattern.CheckPattern(PATTERN_1CANDLE_IS_SPINNINGTOP);
         _result &= _indi_rsi[_indi_rsi_shift][0] < (::Pinbar_Indi_RSI_Period * _level);
-        if (METHOD(_method, 0)) _result &= _indi_atr.IsIncreasing(1);
+        if (METHOD(_method, 0)) _result &= _method > 0 ? _indi_atr.IsIncreasing(1) : _indi_atr.IsDecreasing(1);
         if (METHOD(_method, 1)) _result &= _indi_cci[_indi_cci_shift][0] < ::Pinbar_Indi_CCI_Period * _level;
         // if (METHOD(_method, 2)) _result &= _pattern.CheckPattern(PATTERN_1CANDLE_CHANGE_GT_01PC);
         // if (METHOD(_method, 3)) _result &= !_pattern.CheckPattern(PATTERN_1CANDLE_BODY_GT_WICKS);
@@ -120,7 +120,7 @@ class Stg_Pinbar : public Strategy {
         // Sell signal.
         _result &= _pattern.CheckPattern(PATTERN_1CANDLE_IS_SPINNINGTOP);
         _result &= _indi_rsi[_indi_rsi_shift][0] > (100 - ::Pinbar_Indi_RSI_Period * _level);
-        if (METHOD(_method, 0)) _result &= _indi_atr.IsIncreasing(1);
+        if (METHOD(_method, 0)) _result &= _method > 0 ? _indi_atr.IsIncreasing(1) : _indi_atr.IsDecreasing(1);
         if (METHOD(_method, 1)) _result &= _indi_cci[_indi_cci_shift][0] > ::Pinbar_Indi_CCI_Period * _level;
         // if (METHOD(_method, 2)) _result &= _pattern.CheckPattern(PATTERN_1CANDLE_CHANGE_GT_01PC);
         // if (METHOD(_method, 3)) _result &= !_pattern.CheckPattern(PATTERN_1CANDLE_BODY_GT_WICKS);
