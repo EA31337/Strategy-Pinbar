@@ -59,29 +59,33 @@ class Stg_Pinbar : public Strategy {
       : Strategy(_sparams, _tparams, _cparams, _name) {}
 
   static Stg_Pinbar *Init(ENUM_TIMEFRAMES _tf = NULL) {
-    // Initialize strategy initial values.
-    // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Stg_Pinbar_Params_Defaults stg_pinbar_defaults;
     Strategy *_strat = new Stg_Pinbar(stg_pinbar_defaults, _tparams, _cparams, "Pinbar");
+    return _strat;
+  }
+
+  /**
+   * Event on strategy's init.
+   */
+  void OnInit() {
     // Initialize indicators.
     IndiATRParams _indi_atr_params(::Pinbar_Indi_ATR_Period, ::Pinbar_Indi_ATR_Shift);
-    _indi_atr_params.SetTf(_tf);
-    _strat.SetIndicator(new Indi_ATR(_indi_atr_params), INDI_ATR);
+    _indi_atr_params.SetTf(Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    SetIndicator(new Indi_ATR(_indi_atr_params), INDI_ATR);
 
     IndiCCIParams _indi_cci_params(::Pinbar_Indi_CCI_Period, ::Pinbar_Indi_CCI_Applied_Price, ::Pinbar_Indi_CCI_Shift);
-    _indi_cci_params.SetTf(_tf);
-    _strat.SetIndicator(new Indi_CCI(_indi_cci_params), INDI_CCI);
+    _indi_cci_params.SetTf(Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    SetIndicator(new Indi_CCI(_indi_cci_params), INDI_CCI);
 
     IndiPatternParams _indi_pattern_params(::Pinbar_Indi_Pattern_Shift);
-    _indi_pattern_params.SetTf(_tf);
-    _strat.SetIndicator(new Indi_Pattern(_indi_pattern_params), INDI_PATTERN);
+    _indi_pattern_params.SetTf(Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    SetIndicator(new Indi_Pattern(_indi_pattern_params), INDI_PATTERN);
 
     IndiRSIParams _indi_rsi_params(::Pinbar_Indi_RSI_Period, ::Pinbar_Indi_RSI_Applied_Price, ::Pinbar_Indi_RSI_Shift);
-    _indi_rsi_params.SetTf(_tf);
-    _strat.SetIndicator(new Indi_RSI(_indi_rsi_params), INDI_RSI);
-    return _strat;
+    _indi_rsi_params.SetTf(Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    SetIndicator(new Indi_RSI(_indi_rsi_params), INDI_RSI);
   }
 
   /**
