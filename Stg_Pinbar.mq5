@@ -8,8 +8,9 @@
 
 // Includes EA31337 framework.
 #include <EA31337-classes/EA.mqh>
+#include <EA31337-classes/Indicators/Bitwise/Indi_Pattern.mqh>
+#include <EA31337-classes/Indicators/Indi_ATR.mqh>
 #include <EA31337-classes/Indicators/Indi_CCI.mqh>
-#include <EA31337-classes/Indicators/Indi_Pattern.mqh>
 #include <EA31337-classes/Indicators/Indi_RSI.mqh>
 #include <EA31337-classes/Strategy.mqh>
 
