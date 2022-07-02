@@ -103,19 +103,22 @@ class Stg_Pinbar : public Strategy {
       // Returns false when indicator data is not valid.
       return false;
     }
+    int _indi_atr_shift = ::Pinbar_Indi_ATR_Shift;          // @todo: Read value from iparams.
     int _indi_cci_shift = ::Pinbar_Indi_CCI_Shift;          // @todo: Read value from _indi_cci iparams.
     int _indi_pattern_shift = ::Pinbar_Indi_Pattern_Shift;  // @todo: Read value from _indi_pattern iparams.
     int _indi_rsi_shift = ::Pinbar_Indi_RSI_Shift;          // @todo: Read value from _indi_rsi iparams.
     // bool is_pinbar = (int(_indi_pattern[_indi_pattern_shift][0]) & PATTERN_1CANDLE_IS_SPINNINGTOP) != 0;
     // double _change_pc = Math::ChangeInPct(_ohlc0.GetRange(), _ohlc1.GetRange());
     //_result &= fabs(_change_pc) > _level;
-    PatternCandle1 _pattern((uint)_indi_pattern[_indi_pattern_shift][0]);
+    PatternCandle1 _pattern(_indi_pattern[_indi_pattern_shift].GetValue<uint>(0));
     switch (_cmd) {
       case ORDER_TYPE_BUY:
         // Buy signal.
         _result &= _pattern.CheckPattern(PATTERN_1CANDLE_IS_SPINNINGTOP);
         _result &= _indi_rsi[_indi_rsi_shift][0] < (::Pinbar_Indi_RSI_Period * _level);
-        if (METHOD(_method, 0)) _result &= _method > 0 ? _indi_atr.IsIncreasing(1) : _indi_atr.IsDecreasing(1);
+        if (METHOD(_method, 0))
+          _result &= _method > 0 ? _indi_atr.IsIncreasing(1, 0, _indi_atr_shift)
+                                 : _indi_atr.IsDecreasing(1, 0, _indi_atr_shift);
         if (METHOD(_method, 1)) _result &= _indi_cci[_indi_cci_shift][0] < ::Pinbar_Indi_CCI_Period * _level;
         // if (METHOD(_method, 2)) _result &= _pattern.CheckPattern(PATTERN_1CANDLE_CHANGE_GT_01PC);
         // if (METHOD(_method, 3)) _result &= !_pattern.CheckPattern(PATTERN_1CANDLE_BODY_GT_WICKS);
@@ -124,14 +127,13 @@ class Stg_Pinbar : public Strategy {
         // Sell signal.
         _result &= _pattern.CheckPattern(PATTERN_1CANDLE_IS_SPINNINGTOP);
         _result &= _indi_rsi[_indi_rsi_shift][0] > (100 - ::Pinbar_Indi_RSI_Period * _level);
-        if (METHOD(_method, 0)) _result &= _method > 0 ? _indi_atr.IsIncreasing(1) : _indi_atr.IsDecreasing(1);
+        if (METHOD(_method, 0))
+          _result &= _method > 0 ? _indi_atr.IsIncreasing(1, 0, _indi_atr_shift)
+                                 : _indi_atr.IsDecreasing(1, 0, _indi_atr_shift);
         if (METHOD(_method, 1)) _result &= _indi_cci[_indi_cci_shift][0] > ::Pinbar_Indi_CCI_Period * _level;
         // if (METHOD(_method, 2)) _result &= _pattern.CheckPattern(PATTERN_1CANDLE_CHANGE_GT_01PC);
         // if (METHOD(_method, 3)) _result &= !_pattern.CheckPattern(PATTERN_1CANDLE_BODY_GT_WICKS);
         break;
-    }
-    if (_result) {
-      // DebugBreak();
     }
     return _result;
   }
