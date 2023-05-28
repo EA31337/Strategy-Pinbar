@@ -58,7 +58,7 @@ class Stg_Pinbar : public Strategy {
   Stg_Pinbar(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
       : Strategy(_sparams, _tparams, _cparams, _name) {}
 
-  static Stg_Pinbar *Init(ENUM_TIMEFRAMES _tf = NULL) {
+  static Stg_Pinbar *Init(ENUM_TIMEFRAMES _tf = NULL, EA* _ea = NULL) {
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Stg_Pinbar_Params_Defaults stg_pinbar_defaults;
